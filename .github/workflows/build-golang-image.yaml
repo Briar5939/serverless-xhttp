@@ -31,10 +31,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Set lowercase owner env
-		    run: echo "OWNER_LC=${OWNER,,}" >> $GITHUB_ENV
-		    env:
-		      OWNER: ${{ github.repository_owner }}
+	  - name: Set lowercase owner/repository
+  		run: |
+    	  echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
+  		env:
+    	  OWNER: '${{ github.repository_owner }}'
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -42,7 +43,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ env.OWNER_LC }}/goxhttp:latest
+            ghcr.io/${OWNER_LC}/goxhttp:latest
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.description=HTTP Server
