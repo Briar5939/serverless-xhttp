@@ -43,7 +43,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${OWNER_LC}/goxhttp:latest
+            ghcr.io/${{ env.OWNER_LC }}/goxhttp:latest
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.description=HTTP Server
